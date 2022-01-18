@@ -20,6 +20,10 @@ export const Container = styled.div`
   background: var(--surface-color);
   /* transition: all 5s linear; */
   transition: max-height 4s ease-in-out;
+
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
 
 export const Menu = styled.div`
@@ -59,6 +63,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 export const Title = styled.h1`
@@ -75,11 +80,16 @@ export const Input = styled.input`
   border: 2px solid var(--secondary-color);
   border-radius: 0.3rem;
   padding: 0.5rem;
-  width: 300px;
-  margin-top: 10%;
+  /* width: 300px; */
+  width: 65%;
+  margin-top: 8%;
 
   ::placeholder {
     color: var(--font-color);
+  }
+
+  @media (max-width: 500px) {
+    width: 80%;
   }
 `;
 
