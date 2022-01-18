@@ -9,10 +9,13 @@ import {
   Menu,
   Login,
   Register,
+  Checkbox,
+  CheckboxContainer,
 } from "./style";
 
 export default function Index() {
   const [login, setLogin] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   return (
     <Background>
@@ -50,30 +53,23 @@ export default function Index() {
               <Input type="email" placeholder="Email" />
               <Input type="password" placeholder="Senha" />
               <Input type="password" placeholder="Confirmar Senha" />
-              {/* <Input type="checkbox" /> */}
-              {/* <p style={{ color: "var(--font-color)" }}>
-                Concordo com os termos
-              </p> */}
-              <div
-                style={{
-                  backgroundColor: "var(--auxiliary-color)",
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  marginTop: "10%",
-                  color: "transparent",
-                }}
-              ></div>
-              <div
-                style={{
-                  backgroundColor: "var(--secondary-color)",
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "25%",
-                  marginTop: "10%",
-                  color: "transparent",
-                }}
-              ></div>
+              {/* <div>
+                <input id="checkbox" type="checkbox" />
+                <label for="checkbox" style={{color: "var(--font-color)", paddingLeft: "10px"}}>
+                  Concordo com os <a>termos</a>
+                </label>
+              </div> */}
+              <CheckboxContainer>
+                <Checkbox
+                  checked={checked}
+                  onClick={() => {
+                    setChecked(!checked);
+                  }}
+                />
+                <a href="https://google.com" target="_blank">
+                  Concordo com os termos
+                </a>
+              </CheckboxContainer>
               <Button>Cadastrar</Button>
             </>
           )}

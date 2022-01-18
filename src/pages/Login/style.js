@@ -97,3 +97,28 @@ export const Button = styled.button`
   margin-top: 30px;
   margin-bottom: 30px;
 `;
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  color: var(--font-color);
+  margin-top: 10%;
+  font-size: 0.9em;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: var(--font-color);
+  }
+`;
+
+export const Checkbox = styled.div`
+  border: 2px solid var(--secondary-color);
+  width: 15px;
+  height: 15px;
+  border-radius: 25%;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  background-color: ${(props) =>
+    props.checked ? "var(--secondary-color)" : "transparent"};
+`;
