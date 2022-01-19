@@ -15,6 +15,7 @@ import {
 import api from "../../services/api";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
+import { IoMdCheckmark } from "react-icons/io";
 
 export default function Index() {
   const history = useHistory();
@@ -57,7 +58,7 @@ export default function Index() {
           });
         } else {
           localStorage.setItem("token", response.data.token);
-          history.push("/");
+          history.push("/home");
           window.location.reload();
         }
       }
@@ -128,7 +129,7 @@ export default function Index() {
                 color: "var(--font-color)",
               });
               setTimeout(() => {
-                history.push("/");
+                history.push("/home");
                 window.location.reload();
               }, 2000);
             }
@@ -235,9 +236,15 @@ export default function Index() {
                   onClick={() => {
                     setChecked(!checked);
                   }}
-                />
+                >
+                  <IoMdCheckmark
+                    style={{ transition: "all 0.3s ease-in-out" }}
+                    color={checked ? "var(--secondary-color)" : "transparent"}
+                  />
+                </Checkbox>
+                Concordo com os&nbsp;
                 <a href="https://google.com" target="_blank">
-                  Concordo com os termos
+                  termos
                 </a>
               </CheckboxContainer>
               <Button>Cadastrar</Button>

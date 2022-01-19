@@ -117,7 +117,7 @@ export const CheckboxContainer = styled.div`
 
   a {
     text-decoration: none;
-    color: var(--font-color);
+    color: var(--secondary-color);
   }
 `;
 
@@ -128,7 +128,4 @@ export const Checkbox = styled.div`
   border-radius: 25%;
   margin-right: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  background-color: ${(props) =>
-    props.checked ? "var(--secondary-color)" : "transparent"};
 `;
