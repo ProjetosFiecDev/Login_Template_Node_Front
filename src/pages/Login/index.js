@@ -11,6 +11,7 @@ import {
   Register,
   Checkbox,
   CheckboxContainer,
+  EsqueciSenha,
 } from "./style";
 import api from "../../services/api";
 import Swal from "sweetalert2";
@@ -19,7 +20,8 @@ import { IoMdCheckmark } from "react-icons/io";
 
 export default function Index() {
   const history = useHistory();
-  const [login, setLogin] = useState(true);
+  const [tela, setTela] =
+    useState(0); /** 0 - login | 1 - cadastro | 2 - recuperação */
   const [checked, setChecked] = useState(false);
   const [email, setEmail] = useState("");
   const [nome, setNome] = useState("");
@@ -29,7 +31,7 @@ export default function Index() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (login) {
+    if (tela === 0) {
       if (email === "" || senha === "") {
         Swal.fire({
           title: "Alerta!",
@@ -62,7 +64,7 @@ export default function Index() {
           window.location.reload();
         }
       }
-    } else {
+    } else if (tela === 1) {
       if (
         email === "" ||
         senha === "" ||
@@ -136,6 +138,34 @@ export default function Index() {
           }
         }
       }
+    } else if (tela === 2) {
+      const data = {
+        email: email,
+      };
+      const response = await api.post("/recover", { data });
+      if (response.data.error) {
+        Swal.fire({
+          title: "Alerta!",
+          text: response.data.error,
+          icon: "warning",
+          confirmButtonText: "OK",
+          confirmButtonColor: "var(--primary-color)",
+          background: "var(--surface-color)",
+          color: "var(--font-color)",
+        });
+      } else {
+        Swal.fire({
+          title: "Sucesso!",
+          text: response.data.success,
+          icon: "success",
+          confirmButtonText: "OK",
+          confirmButtonColor: "var(--primary-color)",
+          background: "var(--surface-color)",
+          color: "var(--font-color)",
+        });
+        clear();
+        setTela(0);
+      }
     }
   }
 
@@ -155,18 +185,18 @@ export default function Index() {
       <Container>
         <Menu>
           <Login
-            login={login}
+            tela={tela}
             onClick={() => {
-              setLogin(true);
+              setTela(0);
               clear();
             }}
           >
             Login
           </Login>
           <Register
-            login={login}
+            tela={tela}
             onClick={() => {
-              setLogin(false);
+              setTela(1);
               clear();
             }}
           >
@@ -174,7 +204,7 @@ export default function Index() {
           </Register>
         </Menu>
         <Form onSubmit={handleSubmit}>
-          {login ? (
+          {tela === 0 ? (
             <>
               <Title>Login</Title>
               <Input
@@ -193,9 +223,17 @@ export default function Index() {
                   setSenha(e.target.value);
                 }}
               />
+              <EsqueciSenha
+                onClick={() => {
+                  setTela(2);
+                  clear();
+                }}
+              >
+                Esqueci minha senha
+              </EsqueciSenha>
               <Button>Entrar</Button>
             </>
-          ) : (
+          ) : tela === 1 ? (
             <>
               <Title>Cadastro</Title>
               <Input
@@ -248,6 +286,19 @@ export default function Index() {
                 </a>
               </CheckboxContainer>
               <Button>Cadastrar</Button>
+            </>
+          ) : (
+            <>
+              <Title>Recuperação</Title>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <Button>Enviar</Button>
             </>
           )}
         </Form>

@@ -37,11 +37,11 @@ export const Menu = styled.div`
 
 export const Login = styled.div`
   border-bottom: ${(props) =>
-    props.login
+    props.tela === 0
       ? "2px solid var(--secondary-color)"
       : "2px solid var(--auxiliary-color)"};
   color: ${(props) =>
-    props.login ? "var(--secondary-color)" : "var(--auxiliary-color)"};
+    props.tela === 0 ? "var(--secondary-color)" : "var(--auxiliary-color)"};
   width: 35%;
   grid-area: l;
   cursor: pointer;
@@ -49,14 +49,22 @@ export const Login = styled.div`
 
 export const Register = styled.div`
   border-bottom: ${(props) =>
-    props.login
-      ? "2px solid var(--auxiliary-color)"
-      : "2px solid var(--secondary-color)"};
+    props.tela === 1
+      ? "2px solid var(--secondary-color)"
+      : "2px solid var(--auxiliary-color)"};
   color: ${(props) =>
-    props.login ? "var(--auxiliary-color)" : "var(--secondary-color)"};
+    props.tela === 1 ? "var(--secondary-color)" : "var(--auxiliary-color)"};
   width: 35%;
   grid-area: r;
   cursor: pointer;
+`;
+
+export const EsqueciSenha = styled.div`
+  margin-top: 3%;
+  color: var(--font-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline var(--secondary-color);
 `;
 
 export const Form = styled.form`
